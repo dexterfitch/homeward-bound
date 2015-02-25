@@ -1,14 +1,15 @@
 homewardBound.factory('AnimalsFactory', function AnimalsFactory() {
   var factory = {};
-  factory.animals = [{name: "Jimbo", adopted: false }];
+  factory.animals = [{ name: "Augie", species: "Cat", breed: "Tuxedo", color: "Black/White, Bellydragger", age: "5", adopted: false }];
 
   factory.addAnimal = function() {
-    var animal = { name: factory.petName, adopted: false };
+    var animal = { name: factory.petName, species: factory.petSpecies, breed: factory.petBreed, color: factory.petColor, age: factory.petAge, adopted: false };
     factory.animals.push(animal);
     factory.petName = null;
-    // factory.petSpecies = null;
-    // factory.petBreed = null;
-    // factory.petAge = null;
+    factory.petSpecies = "";
+    factory.petBreed = null;
+    factory.petColor = null;
+    factory.petAge = null;
   };
 
   factory.deleteAnimal = function(animal) {
@@ -19,6 +20,6 @@ homewardBound.factory('AnimalsFactory', function AnimalsFactory() {
   return factory;
 });
 
-// , species: factory.petSpecies, breed: factory.petBreed, age: factory.petAge,
+// species: factory.petSpecies, breed: factory.petBreed, color: factory.petColor, age: factory.petAge,
 
-// species: "Dog", breed: "Beagle", age: "2", 
+// species: "Dog", breed: "Beagle", age: "2",
