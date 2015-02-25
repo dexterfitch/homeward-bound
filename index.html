@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="homewardBound">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="lib/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/AvailableAnimalsController.js"></script>
+    <script src="controllers/AdoptedAnimalsController.js"></script>
+    <script src="services/AnimalsFactory.js"></script>
+
+    <title>Homeward Bound</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="row" ng-controller="AvailableAnimalsCtrl">
+
+        <div class="col-md-8">
+          <h1>Homeward Bound</h1>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Search Pets</h4>
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input ng-model="query" type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-6" ng-controller="AvailableAnimalsCtrl">
+          <h2>Available Pets</h2>
+          <ul class="list-unstyled">
+            <li ng-repeat="item in filtered = (animals | filter:query)">
+              <span ng-click="editing = true" ng-hide="editing">
+                {{item.name}} <a ng-click="AnimalsFactory.deleteAnimal(item)"><span class="glyphicon glyphicon-remove"></span></a>
+              </span>
+              <span class="form-group" ng-show="editing" ng-submit="editing = false">
+                <form class="form-inline" role="form">
+                  <input type="text" class="form-control input-sm" ng-model="item.petName" placeholder="Edit nickname">
+                  <button class="btn btn-default btn-sm" type="submit">Save</button>
+                </form>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <h2>Adopted Pets</h2>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-12" ng-controller="AvailableAnimalsCtrl">
+          <h4>Add Adoptable Pet</h4>
+          <form ng-submit="AnimalsFactory.addAnimal()" class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="AnimalsFactory.petName" class="form-control input-sm" placeholder="Nickname" required>
+              <!-- <select ng-model="AnimalsFactory.petSpecies" class="form-control input-sm">
+                <option value="" style="display:none">Species</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Small Mammal">Small Mammal</option>
+                <option value="Bird">Bird</option>
+                <option value="Reptile/Amphibian">Reptile/Amphibian</option>
+              </select>
+              <input type="text" ng-model="AnimalsFactory.petBreed" class="form-control input-sm" placeholder="Breed(s)">
+              <input type="text" ng-model="AnimalsFactory.petAge" class="form-control input-sm" placeholder="Age"> -->
+              <button type="submit" class="btn btn-info btn-sm">Submit</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>
